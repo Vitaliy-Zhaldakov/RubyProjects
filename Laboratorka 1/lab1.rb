@@ -16,3 +16,10 @@ if language.chomp == "Ruby"
 else 
   puts "Скоро будет Ruby" 
 end
+
+# Variant 2
+unless language.chomp == "Ruby"
+  puts "Скоро будет Ruby"
+else
+  puts "Подлиза"
+end
