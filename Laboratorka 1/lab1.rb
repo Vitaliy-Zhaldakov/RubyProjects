@@ -26,3 +26,14 @@ end
 
 # Variant 3
 puts "Подлиза" if language.chomp == "Ruby"
+
+# Switch case
+case language.chomp
+  when "Ruby"
+    puts "Красава"
+  when "C++"
+    puts "Сочувствую"
+  when "Английский"
+    puts "Хорошая шутка)"
+  else puts "Скоро будет Ruby"
+end
