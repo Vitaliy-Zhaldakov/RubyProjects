@@ -23,3 +23,6 @@ unless language.chomp == "Ruby"
 else
   puts "Подлиза"
 end
+
+# Variant 3
+puts "Подлиза" if language.chomp == "Ruby"
