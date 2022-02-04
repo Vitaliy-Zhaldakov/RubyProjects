@@ -37,3 +37,14 @@ case language.chomp
     puts "Хорошая шутка)"
   else puts "Скоро будет Ruby"
 end
+
+# Block 1 Task 4
+puts "Введите команду ОС:"
+input = gets
+command = system "#{input}"
+puts command
+
+puts "Введите команду Ruby:"
+input = gets
+command = `ruby "-e#{input}"`
+puts command
