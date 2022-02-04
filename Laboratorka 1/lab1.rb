@@ -56,3 +56,44 @@ while number != 0
   number /= 10
 end
 puts sum
+
+# Block 2 Task 2
+def sum_digits_of_number
+  number = ARGV[0].to_i
+  sum = 0
+  while number != 0
+    sum += number % 10
+    number /= 10
+  end
+  puts sum
+end
+
+def max_digit
+  number = ARGV[0].to_i
+  max = number % 10
+  while number != 0
+    max = number % 10 if number % 10 > max
+    number /= 10
+  end
+  puts max
+end
+
+def min_digit
+  number = ARGV[0].to_i
+  min = number % 10
+  while number != 0
+    min = number % 10 if number % 10 < min
+    number /= 10
+  end
+  puts min
+end
+
+def mult_digits
+  number = ARGV[0].to_i
+  mult = 1
+  while number != 0
+    mult *= number % 10
+    number /= 10
+  end
+  puts mult
+end
