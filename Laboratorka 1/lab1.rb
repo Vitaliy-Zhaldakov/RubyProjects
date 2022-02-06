@@ -132,3 +132,39 @@ def mult_elem_in_list(list)
   end
   puts mult
 end
+
+# Block 3 Task 2
+
+=begin
+1-й аргумент программы - метод
+2-й аргумент программы - место чтения списка
+3-й аргумент программы - адрес файла
+=end
+
+def initialization_list
+  if ARGV[1] == "keyboard"
+    ARGV.clear
+    puts "Введите список:"
+    list = gets.chomp.split(" ")
+  elsif ARGV[1] == "file"
+    file = File.new(ARGV[2], "r")
+    list = file.gets.chomp.split(" ")
+  end
+end
+
+case ARGV[0]
+  when "M1"
+    list = initialization_list
+    min_elem_in_list(list)
+  when "M2"
+    list = initialization_list
+    max_elem_in_list(list)
+  when "M3"
+    list = initialization_list
+    sum_elem_in_list(list)
+  when "M4"
+    list = initialization_list
+    mult_elem_in_list(list)
+  else
+    puts "Hello World"
+end
