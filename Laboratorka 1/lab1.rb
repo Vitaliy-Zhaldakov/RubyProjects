@@ -97,3 +97,38 @@ def mult_digits
   end
   puts mult
 end
+
+# Block 3 Task 1
+def min_elem_in_list(list)
+  min = list[0].to_i
+  list.each do |elem|
+    elem = elem.to_i
+    min = elem if elem < min
+  end
+  puts min
+end
+
+def max_elem_in_list(list)
+  max = list[0].to_i
+  list.each do |elem|
+    elem = elem.to_i
+    max = elem if elem > max
+  end
+  puts max
+end
+
+def sum_elem_in_list(list)
+  sum = 0
+  list.each do |elem|
+    sum += elem.to_i
+  end
+  puts sum
+end
+
+def mult_elem_in_list(list)
+  mult = 1
+  list.each do |elem|
+    mult *= elem.to_i
+  end
+  puts mult
+end
