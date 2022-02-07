@@ -111,6 +111,19 @@ def kolvo_chet_not_simple
   puts kolvo
 end
 
+# Найти максимальную цифру числа, не делящуюся на 3
+def max_digit_not_div_3
+  number = ARGV[1].to_i
+  max = 0
+  while number != 0
+    if number % 10 > max and number % 10 % 3 != 0
+      max = number % 10
+    end
+    number /= 10
+  end
+  puts max
+end
+
 # Block 3 Task 1
 def min_elem_in_list(list)
   min = list[0].to_i
