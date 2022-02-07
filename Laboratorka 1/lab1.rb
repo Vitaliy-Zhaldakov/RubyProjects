@@ -98,6 +98,19 @@ def mult_digits
   puts mult
 end
 
+# Block 2 Task 3
+# Найти количество четных чисел, не взаимно простых с данным
+def kolvo_chet_not_simple
+  number = ARGV[1].to_i
+  kolvo = 0
+  even_num = 2
+  while even_num < number
+    kolvo += 1 if number % even_num == 0
+    even_num += 2
+  end
+  puts kolvo
+end
+
 # Block 3 Task 1
 def min_elem_in_list(list)
   min = list[0].to_i
