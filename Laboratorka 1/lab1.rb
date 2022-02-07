@@ -124,6 +124,63 @@ def max_digit_not_div_3
   puts max
 end
 
+=begin
+Найти произведение максимального числа, не взаимно простого
+с данным, не делящегося на наименьший делитель исходно числа, и
+суммы цифр числа, меньших 5
+=end
+def mult_max_num_and_sum
+  number = ARGV[1].to_i
+
+  # Наименьший делитель исходного числа
+  def min_del(number)
+    del = 2
+    while number % del != 0
+      del += 1
+    end
+    return del
+  end
+
+  del = min_del(number)
+  max = number - 1
+
+  # Максимальное число, не взаимно простое с данным и
+  # не делящееся на наименьший делитель
+  def max_num(number, del, max)
+    while number % max != 0
+      max -= 1
+    end
+    if max % del != 0
+      return max
+    else
+      max_num(number, del, max - 1)
+    end
+  end
+
+  # Сумма цифр числа, меньших 5
+  def sum_digits_less_5(number)
+    sum = 0
+    while number != 0
+      sum += number % 10 if number % 10 < 5
+      number /= 10
+    end
+    return sum
+  end
+
+  puts max_num(number, del, max) * sum_digits_less_5(number)
+end
+
+case ARGV[0]
+  when "M1"
+    kolvo_chet_not_simple
+  when "M2"
+    max_digit_not_div_3
+  when "M3"
+    mult_max_num_and_sum
+  else
+    puts "Hello World"
+end
+
 # Block 3 Task 1
 def min_elem_in_list(list)
   min = list[0].to_i
