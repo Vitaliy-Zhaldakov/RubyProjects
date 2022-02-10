@@ -107,11 +107,10 @@ def kolvo_chet_not_simple
   while even_num < number
     if nod(number, even_num) != 1
       kolvo += 1
-      puts even_num
     end
     even_num += 2
   end
-  puts kolvo
+  kolvo
 end
 
 # Вычисление наибольшего общего делителя
@@ -133,7 +132,7 @@ def max_digit_not_div_3
     end
     number /= 10
   end
-  puts max
+  max
 end
 
 =begin
@@ -149,7 +148,7 @@ def mult_max_num_and_sum
     while number % del != 0
       del += 1
     end
-    return del
+    del
   end
 
   del = min_del(number)
@@ -175,19 +174,19 @@ def mult_max_num_and_sum
       sum += number % 10 if number % 10 < 5
       number /= 10
     end
-    return sum
+    sum
   end
 
-  puts max_num(number, del, max) * sum_digits_less_5(number)
+  max_num(number, del, max) * sum_digits_less_5(number)
 end
 
 case ARGV[0]
   when "M1"
-    kolvo_chet_not_simple
+    puts kolvo_chet_not_simple
   when "M2"
-    max_digit_not_div_3
+    puts max_digit_not_div_3
   when "M3"
-    mult_max_num_and_sum
+    puts mult_max_num_and_sum
   else
     puts "Hello World"
 end
@@ -199,7 +198,7 @@ def min_elem_in_list(list)
     elem = elem.to_i
     min = elem if elem < min
   end
-  puts min
+  min
 end
 
 def max_elem_in_list(list)
@@ -208,7 +207,7 @@ def max_elem_in_list(list)
     elem = elem.to_i
     max = elem if elem > max
   end
-  puts max
+  max
 end
 
 def sum_elem_in_list(list)
@@ -216,7 +215,7 @@ def sum_elem_in_list(list)
   list.each do |elem|
     sum += elem.to_i
   end
-  puts sum
+  sum
 end
 
 def mult_elem_in_list(list)
@@ -224,7 +223,7 @@ def mult_elem_in_list(list)
   list.each do |elem|
     mult *= elem.to_i
   end
-  puts mult
+  mult
 end
 
 # Block 3 Task 2
@@ -249,16 +248,16 @@ end
 case ARGV[0]
   when "M1"
     list = initialization_list
-    min_elem_in_list(list)
+    puts min_elem_in_list(list)
   when "M2"
     list = initialization_list
-    max_elem_in_list(list)
+    puts max_elem_in_list(list)
   when "M3"
     list = initialization_list
-    sum_elem_in_list(list)
+    puts sum_elem_in_list(list)
   when "M4"
     list = initialization_list
-    mult_elem_in_list(list)
+    puts mult_elem_in_list(list)
   else
     puts "Hello World"
 end
@@ -270,15 +269,24 @@ end
 убывающую последовательность
 =end
 
+def ind_of_decreasing_sequence(array)
+  hash = Hash[array.map.with_index.max(array.length)]
+  hash.values
+end
+
+# Block 4 Task 16
 =begin
-Поиск максимального элемента в каждой итерации,
-выводится его индекс по хэшу, удаляется из массива 
+Дан целочисленный массив. Необходимо найти элементы,
+расположенные между первым и вторым максимальным
 =end
-def ind_of_decreasing_sequence(array, hash)
-  if array != []
-    max = array.max
-    array.delete(max)
-    print "#{hash.key(max)} "
-    ind_of_decreasing_sequence(array, hash)
+def between_fir_sec_max(array)
+  # Создаётся хэш двух максимальных элементов с их индексами
+  hash = Hash[array.map.with_index.max(2)]
+  array_ind = hash.values
+  length = (array_ind[0] - array_ind[1]).abs
+  if array_ind[0] > array_ind[1]
+    array.slice(array_ind[1] + 1, length - 1)
+  else
+    array.slice(array_ind[0] + 1, length - 1)
   end
 end
