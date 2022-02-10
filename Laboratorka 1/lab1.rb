@@ -105,10 +105,22 @@ def kolvo_chet_not_simple
   kolvo = 0
   even_num = 2
   while even_num < number
-    kolvo += 1 if number % even_num == 0
+    if nod(number, even_num) != 1
+      kolvo += 1
+      puts even_num
+    end
     even_num += 2
   end
   puts kolvo
+end
+
+# Вычисление наибольшего общего делителя
+def nod(num1, num2)
+  if num1 % num2 == 0
+    num2
+  else
+    nod(num2, num1 % num2)
+  end
 end
 
 # Найти максимальную цифру числа, не делящуюся на 3
@@ -131,7 +143,6 @@ end
 =end
 def mult_max_num_and_sum
   number = ARGV[1].to_i
-
   # Наименьший делитель исходного числа
   def min_del(number)
     del = 2
@@ -147,7 +158,7 @@ def mult_max_num_and_sum
   # Максимальное число, не взаимно простое с данным и
   # не делящееся на наименьший делитель
   def max_num(number, del, max)
-    while number % max != 0
+    while nod(number, max) == 1
       max -= 1
     end
     if max % del != 0
