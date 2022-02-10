@@ -262,3 +262,23 @@ case ARGV[0]
   else
     puts "Hello World"
 end
+
+# Block 4 Task 4
+=begin
+Дан целочисленный массив. Вывести индексы массива в том
+порядке, в котором соответствующие им элементы образуют
+убывающую последовательность
+=end
+
+=begin
+Поиск максимального элемента в каждой итерации,
+выводится его индекс по хэшу, удаляется из массива 
+=end
+def ind_of_decreasing_sequence(array, hash)
+  if array != []
+    max = array.max
+    array.delete(max)
+    print "#{hash.key(max)} "
+    ind_of_decreasing_sequence(array, hash)
+  end
+end
