@@ -304,3 +304,21 @@ def between_fir_last_max(array)
     array.slice(array_ind[0] + 1, length - 1)
   end
 end
+
+# Block 4 Task 40
+=begin
+Дан целочисленный массив. Необходимо найти минимальный
+четный элемент
+=end
+def even_min(array)
+  if array != []
+    if array.min % 2 == 0
+      array.min
+    else
+      array.delete(array.min)
+      even_min(array)
+    end
+  else
+    puts "Такого нет"
+  end
+end
