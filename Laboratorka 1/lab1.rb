@@ -414,3 +414,10 @@ def dates_in_string(string)
     \s+(?:декабря|января|февраля|марта|апреля|мая|июня|июля|августа|сентября|октября|ноября)
     \s+\d{1,4})/ixu)
 end
+  
+# Block 5 Final Task 4
+=begin
+Дана строка. Необходимо подсчитать количество чисел в этой
+строке, значение которых меньше 5
+=end
+def amount_num_less_5(string) = string.scan(/\d+/).select {|num| num.to_i < 5}.length
