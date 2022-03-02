@@ -286,3 +286,21 @@ def between_fir_sec_max(array)
     array.slice(array_ind[0] + 1, length - 1)
   end
 end
+
+# Block 4 Task 28
+=begin
+Дан целочисленный массив. Необходимо найти элементы,
+расположенные между первым и последним максимальным
+=end
+def between_fir_last_max(array)
+  # Создание массива из индексов первого и последнего максимального
+  array_ind = Array(array.index(array.max))
+  array_ind.push(array.index(array.min))
+  # Выбираются элементы между первым и последним максимальным
+  length = (array_ind[0] - array_ind[1]).abs
+  if array_ind[0] > array_ind[1]
+    array.slice(array_ind[1] + 1, length - 1)
+  else
+    array.slice(array_ind[0] + 1, length - 1)
+  end
+end
