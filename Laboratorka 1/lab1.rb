@@ -428,3 +428,10 @@ def amount_num_less_5(string) = string.scan(/\d+/).select {|num| num.to_i < 5}.l
 латиницы в этой строке
 =end
 def unused_chars(string) = ("a".."z").to_a - string.scan(/[a-z]/)
+  
+# Block 5 Final Task 15
+=begin
+Дана строка. Необходимо подсчитать количество цифр в этой
+строке, значение которых больше 5
+=end
+def amount_digits_more_5(string) = string.scan(/\d/).count {|digit| digit.to_i > 5}
