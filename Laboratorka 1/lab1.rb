@@ -421,3 +421,10 @@ end
 строке, значение которых меньше 5
 =end
 def amount_num_less_5(string) = string.scan(/\d+/).select {|num| num.to_i < 5}.length
+  
+# Block 5 Final Task 11
+=begin
+Дана строка. Необходимо найти все незадействованные символы
+латиницы в этой строке
+=end
+def unused_chars(string) = ("a".."z").to_a - string.scan(/[a-z]/)
