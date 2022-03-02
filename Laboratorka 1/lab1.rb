@@ -58,50 +58,45 @@ end
 puts sum
 
 # Block 2 Task 2
-def sum_digits_of_number
-  number = ARGV[0].to_i
+def sum_digits_of_number(number)
   sum = 0
   while number != 0
     sum += number % 10
     number /= 10
   end
-  puts sum
+  sum
 end
 
-def max_digit
-  number = ARGV[0].to_i
+def max_digit(number)
   max = number % 10
   while number != 0
     max = number % 10 if number % 10 > max
     number /= 10
   end
-  puts max
+  max
 end
 
-def min_digit
-  number = ARGV[0].to_i
+def min_digit(number)
   min = number % 10
   while number != 0
     min = number % 10 if number % 10 < min
     number /= 10
   end
-  puts min
+  min
 end
 
-def mult_digits
-  number = ARGV[0].to_i
+def mult_digits(number)
   mult = 1
   while number != 0
     mult *= number % 10
     number /= 10
   end
-  puts mult
+  mult
 end
 
 # Block 2 Task 3
 # Найти количество четных чисел, не взаимно простых с данным
-def kolvo_chet_not_simple
-  number = ARGV[1].to_i
+def kolvo_chet_not_simple(number)
   kolvo = 0
   even_num = 2
   while even_num < number
@@ -123,8 +118,7 @@ def nod(num1, num2)
 end
 
 # Найти максимальную цифру числа, не делящуюся на 3
-def max_digit_not_div_3
-  number = ARGV[1].to_i
+def max_digit_not_div_3(number)
   max = 0
   while number != 0
     if number % 10 > max and number % 10 % 3 != 0
@@ -140,8 +134,7 @@ end
 с данным, не делящегося на наименьший делитель исходно числа, и
 суммы цифр числа, меньших 5
 =end
-def mult_max_num_and_sum
-  number = ARGV[1].to_i
+def mult_max_num_and_sum(number)
   # Наименьший делитель исходного числа
   def min_del(number)
     del = 2
@@ -182,14 +175,15 @@ end
 
 case ARGV[0]
   when "M1"
-    puts kolvo_chet_not_simple
+    puts kolvo_chet_not_simple(ARGV[1].to_i)
   when "M2"
-    puts max_digit_not_div_3
+    puts max_digit_not_div_3(ARGV[1].to_i)
   when "M3"
-    puts mult_max_num_and_sum
+    puts mult_max_num_and_sum(ARGV[1].to_i)
   else
     puts "Hello World"
 end
+
 
 # Block 3 Task 1
 def min_elem_in_list(list)
@@ -270,8 +264,9 @@ end
 =end
 
 def ind_of_decreasing_sequence(array)
-  hash = Hash[array.map.with_index.max(array.length)]
-  hash.values
+  array_with_index = array.map.with_index.max(array.length)
+  # Массив индексов
+  array_with_index.map {|elem| elem.pop}
 end
 
 # Block 4 Task 16
@@ -280,9 +275,10 @@ end
 расположенные между первым и вторым максимальным
 =end
 def between_fir_sec_max(array)
-  # Создаётся хэш двух максимальных элементов с их индексами
-  hash = Hash[array.map.with_index.max(2)]
-  array_ind = hash.values
+  # Создаётся массив двух максимальных элементов с их индексами
+  first_second_max = array.map.with_index.max(2)
+  # Массив индексов двух максимальных
+  array_ind = first_second_max.map {|elem| elem.pop}
   length = (array_ind[0] - array_ind[1]).abs
   if array_ind[0] > array_ind[1]
     array.slice(array_ind[1] + 1, length - 1)
