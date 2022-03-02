@@ -395,3 +395,10 @@ def check_palindrom(string) = string == string.reverse
 посчитать количество слов
 =end
 def num_words(string) = string.split(" ").length
+  
+# Block 5 Task 15
+=begin
+Дано натуральное число. Необходимо найти количество различных
+цифр в его десятичной записи
+=end
+def num_diff_digits(number) = number.to_s.split("").uniq.length
