@@ -402,3 +402,15 @@ def num_words(string) = string.split(" ").length
 цифр в его десятичной записи
 =end
 def num_diff_digits(number) = number.to_s.split("").uniq.length
+  
+# Block 5 Final Task 2
+=begin
+Дана строка. Необходимо найти все даты, которые описаны в
+виде "31 февраля 2007"
+=end
+def dates_in_string(string)
+  string.scan(/
+    \s+((?:[1-9]|[12][\d]|[3][01])
+    \s+(?:декабря|января|февраля|марта|апреля|мая|июня|июля|августа|сентября|октября|ноября)
+    \s+\d{1,4})/ixu)
+end
