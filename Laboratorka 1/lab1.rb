@@ -388,3 +388,10 @@ end
 Дана строка. Необходимо проверить, является ли она палиндромом
 =end
 def check_palindrom(string) = string == string.reverse
+  
+# Block 5 Task 11
+=begin
+Дана строка в которой записаны слова через пробел. Необходимо
+посчитать количество слов
+=end
+def num_words(string) = string.split(" ").length
