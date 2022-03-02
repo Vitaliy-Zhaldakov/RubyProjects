@@ -322,3 +322,62 @@ def even_min(array)
     puts "Такого нет"
   end
 end
+
+# Block 4 Task 52
+=begin
+Для введенного числа построить список всех его простых делителей,
+причем если введенное число делится на простое число p в степени a,
+то в итоговом списке число p должно повторятся a раз.
+Результирующий список должен быть упорядочен по возрастанию
+=end
+
+# Проверка на простое число
+def check_prime(number) = (2..number-1).select {|del| number % del == 0}.empty?
+
+# Поиск степени, при возведении делителя в которую введённое число делится на него
+def power(number, del, k)
+  if number % del**k == 0
+    power(number, del, k+1)
+  else
+    k - 1
+  end
+end
+
+def result_list(number)
+  # Создание списка простых делителей
+  list = (2..number).select {|del| number % del == 0 && check_prime(del) == true}
+  result = []
+  list.select {|elem| power(number, elem, 2).times {result.push(elem)}}
+  result
+end
+
+def initialization
+  if ARGV[1] == "keyboard"
+    ARGV.clear
+    puts "Введите массив:"
+    array = gets.chomp.split(" ")
+  elsif ARGV[1] == "file"
+    file = File.new(ARGV[2], "r")
+    array = file.gets.chomp.split(" ")
+  end
+end
+
+case ARGV[0]
+  when "M1"
+    array = initialization
+    print ind_of_decreasing_sequence(array)
+  when "M2"
+    array = initialization
+    puts between_fir_sec_max(array)
+  when "M3"
+    array = initialization
+    puts between_fir_last_max(array)
+  when "M4"
+    array = initialization
+    puts even_min(array)
+  when "M5"
+    number = initialization
+    print result_list(number.first.to_i)
+  else
+    puts "Ошибка, метод некорректен"
+end
