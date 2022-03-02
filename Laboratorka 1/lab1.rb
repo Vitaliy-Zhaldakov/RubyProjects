@@ -381,3 +381,10 @@ case ARGV[0]
   else
     puts "Ошибка, метод некорректен"
 end
+
+  
+# Block 5 Task 4
+=begin
+Дана строка. Необходимо проверить, является ли она палиндромом
+=end
+def check_palindrom(string) = string == string.reverse
