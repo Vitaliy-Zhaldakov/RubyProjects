@@ -435,3 +435,15 @@ def unused_chars(string) = ("a".."z").to_a - string.scan(/[a-z]/)
 строке, значение которых больше 5
 =end
 def amount_digits_more_5(string) = string.scan(/\d/).count {|digit| digit.to_i > 5}
+  
+# Block 6 Task 1
+# Дан список строк из файла. Упорядочить по длине строки
+file = File.new(ARGV[0], "r")
+listString = file.readlines.map {|string| string.chomp}
+.sort {|a,b| a.length <=> b.length}
+
+# Block 6 Task 2
+# Дан список строк. Упорядочить по количеству слов в строке
+listString = file.readlines.map {|string| string.chomp}
+.sort {|a,b| a.split(" ").length <=> b.split(" ").length}
+
