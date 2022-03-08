@@ -464,3 +464,17 @@ end
 def sortDiffConVow(file) = listString = file.readlines.map {|string| string.chomp}
 .sort {|a,b| differenceConVow(a) <=> differenceConVow(b)}
 
+# Block 6 Task 3.7
+=begin
+Отсортировать строки в порядке увеличения разницы между количеством сочетаний
+«гласная-согласная» и «согласная-гласная» в строке
+=end
+def diffCombinConVow(string)
+  vowel = "eyuoai"
+  vowCon = string.split("").count {|letter| vowel.include?(letter) && !vowel.include?(letter.next)}
+  conVow = string.split("").count {|letter| !vowel.include?(letter) && vowel.include?(letter.next)}
+  (vowCon - conVow).abs
+end
+
+def sortDiffCombin(file) = listString = file.readlines.map {|string| string.chomp}
+.sort {|a,b| diffCombinConVow(a) <=> diffCombinConVow(b)}
