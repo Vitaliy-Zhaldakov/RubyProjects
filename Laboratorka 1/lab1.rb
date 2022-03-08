@@ -447,3 +447,20 @@ listString = file.readlines.map {|string| string.chomp}
 listString = file.readlines.map {|string| string.chomp}
 .sort {|a,b| a.split(" ").length <=> b.split(" ").length}
 
+# Block 6 Task 3.1
+=begin
+Отсортировать строки в порядке увеличения разницы между средним количеством
+согласных и средним количеством гласных букв в строк
+=end
+
+# Получение разницы между ср. количеством согласных и гласных
+def differenceConVow(string)
+  vowel = "eyuoai"
+  averageVow = string.split("").select {|letter| vowel.include?(letter)}.length / string.length.to_f
+  averageCon = string.split("").select {|letter| !vowel.include?(letter)}.length / string.length.to_f
+  difference = (averageCon - averageVow).abs
+end
+
+def sortDiffConVow(file) = listString = file.readlines.map {|string| string.chomp}
+.sort {|a,b| differenceConVow(a) <=> differenceConVow(b)}
+
