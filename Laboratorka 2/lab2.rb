@@ -1,10 +1,16 @@
 class Department
   attr_accessor :name, :phone, :duties, :highlightedDuty
 
+  def self.verifyPhone(phone)
+    /[1-9]+-[1-9]+-[1-9]+/.match(phone).to_s == phone
+  end
+
   def initialize(name, phone)
+    raise "Error phone number" if self.class.verifyPhone(phone) == false
     @name = name
     @phone = phone
     @duties = []
+  rescue
   end
 
   def getInfo
@@ -46,3 +52,15 @@ puts "----- Информация об отделах -----"
 hr.getInfo
 logistics.getInfo
 finance.getInfo
+
+hr.addDuty("Проверить адрес работника")
+hr.addDuty("Добавить работника")
+hr.addDuty("Изменить номер работника")
+hr.getDuties
+
+hr.deleteDuty("Добавить работника")
+hr.getDuties
+
+hr.highlightDuty("Проверить адрес работника")
+hr.changeHighlightedDuty("Проверить сертификат работника")
+hr.getDuties
