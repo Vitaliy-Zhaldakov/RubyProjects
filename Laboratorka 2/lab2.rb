@@ -1,43 +1,43 @@
 class Department
   attr_accessor :name, :phone, :duties, :highlightedDuty
 
-  def self.verifyPhone(phone)
+  def self.verify_phone(phone)
     /[1-9]+-[1-9]+-[1-9]+/.match(phone).to_s == phone
   end
 
   def initialize(name, phone)
-    raise "Error phone number" if self.class.verifyPhone(phone) == false
+    raise "Error phone number" if self.class.verify_phone(phone) == false
     @name = name
     @phone = phone
     @duties = []
   rescue
   end
 
-  def getInfo
+  def get_info
     puts "#{@name} -> телефон: #{@phone}"
   end
 
-  def addDuty(duty)
+  def add_duty(duty)
     @duties << duty
   end
 
-  def deleteDuty(selectedDuty)
+  def delete_duty(selectedDuty)
     @duties.delete(selectedDuty)
   end
 
-  def highlightDuty(selectedDuty)
+  def highlight_duty(selectedDuty)
     @highlightedDuty = @duties[@duties.index(selectedDuty)]
   end
 
-  def getTextHighlightedDuty
+  def get_text_highlighted_duty
     puts @highlightedDuty
   end
 
-  def changeHighlightedDuty(newDuty)
+  def change_highlighted_duty(newDuty)
     @duties[@duties.index(@highlightedDuty)] = newDuty
   end
 
-  def getDuties
+  def get_duties
     puts "----- Список обязанностей -----"
     puts @duties
   end
@@ -49,18 +49,18 @@ logistics = Department.new("Отдел логистики", "261-46-89")
 finance = Department.new("Отдел финансов", "261-99-66")
 
 puts "----- Информация об отделах -----"
-hr.getInfo
-logistics.getInfo
-finance.getInfo
+hr.get_info
+logistics.get_info
+finance.get_info
 
-hr.addDuty("Проверить адрес работника")
-hr.addDuty("Добавить работника")
-hr.addDuty("Изменить номер работника")
-hr.getDuties
+hr.add_duty("Проверить адрес работника")
+hr.add_duty("Добавить работника")
+hr.add_duty("Изменить номер работника")
+hr.get_duties
 
-hr.deleteDuty("Добавить работника")
-hr.getDuties
+hr.delete_duty("Добавить работника")
+hr.get_duties
 
-hr.highlightDuty("Проверить адрес работника")
-hr.changeHighlightedDuty("Проверить сертификат работника")
-hr.getDuties
+hr.highlight_duty("Проверить адрес работника")
+hr.change_highlighted_duty("Проверить сертификат работника")
+hr.get_duties
