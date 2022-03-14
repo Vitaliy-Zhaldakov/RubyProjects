@@ -44,6 +44,14 @@ class Department
 
 end
 
+def write_to_txt(fileName, array)
+  File.open(fileName, "a").puts array
+end
+
+def read_from_txt(fileName)
+  File.open(fileName, "r").readlines.map { |line| eval(line.chomp) }
+end
+
 hr = Department.new("Отдел кадров", "261-55-11")
 logistics = Department.new("Отдел логистики", "261-46-89")
 finance = Department.new("Отдел финансов", "261-99-66")
