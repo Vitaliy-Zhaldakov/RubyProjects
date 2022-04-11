@@ -1,0 +1,41 @@
+--- !ruby/object:Department_list
+arrayDepartments:
+- !ruby/object:Department
+  phone: 261-55-11
+  name: Отдел кадров
+  selectedDuty:
+  duties:
+  - Проверить адрес работника
+  - Добавить работника
+  post_list: !ruby/object:Post_list
+    post_list:
+    - &1 !ruby/object:Post
+      title: Продавец-консультант
+      department: Отдел обслуживания
+      salary: 35000
+      vacant: 1
+    - !ruby/object:Post
+      title: Управляющий
+      department: Отдел логистики
+      salary: 45000
+      vacant: 0
+    selectedPost:
+- !ruby/object:Department
+  phone: 261-46-89
+  name: Отдел логистики
+  selectedDuty:
+  duties: []
+  post_list: !ruby/object:Post_list
+    post_list:
+    - *1
+    selectedPost:
+- !ruby/object:Department
+  phone: 261-99-66
+  name: Отдел финансов
+  selectedDuty:
+  duties:
+  - Изменить номер работника
+  post_list: !ruby/object:Post_list
+    post_list: []
+    selectedPost:
+selectedNote:
