@@ -1,9 +1,13 @@
-class Post_list
-  attr_accessor :post_list
+current_path = File.dirname(__FILE__)
+require "#{current_path}/EntityOperations.rb"
+
+class Post_list < EntityOperations
+  attr_accessor :list
 
   def initialize(array)
-    @post_list = Array(array)
-    @selectedPost = nil
+    # Список должностей
+    @list = Array(array)
+    @selectedEntity = nil
   end
 
 
@@ -41,30 +45,12 @@ class Post_list
     File.open(fileName, 'a').puts YAML.dump(object)
   end
 
-  # Методы работы с должностями
-  def add_post(post)
-    @post_list << post
-  end
-
-  def select_post(index)
-    @selectedPost = index
-  end
-
-  def delete_post
-    @post_list.delete_at(@selectedPost)
-    @selectedPost = nil
-  end
-
-  def change_post(newPost)
-    @post_list[@selectedPost] = newPost
-  end
-
   # Получить все вакантные должности отдела
   def get_vacant_posts
-    @post_list.select {|post| post.vacant == 1}
+    @list.select {|post| post.vacant == 1}
   end
 
   def get_posts
-    @post_list.select {|post| post}
+    @list.select {|post| post}
   end
 end
