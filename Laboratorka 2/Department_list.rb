@@ -1,12 +1,15 @@
+current_path = File.dirname(__FILE__)
 require "yaml"
 require "yaml/store"
+require "#{current_path}/EntityOperations.rb"
 
-class Department_list
-  attr_accessor :arrayDepartments
+class Department_list < EntityOperations
+  attr_accessor :list
 
   def initialize(array)
-    @arrayDepartments = Array(array)
-    @selectedNote = nil
+    # Список отделов
+    @list = Array(array)
+    @selectedEntity = nil
   end
 
   def Department_list.read_from_txt(fileName)
@@ -46,32 +49,16 @@ class Department_list
 
   def to_s
     output = ""
-    @arrayDepartments.select{|dep| output += "#{dep.short_to_s}\n\n"}
+    @list.select{|dep| output += "#{dep.short_to_s}\n\n"}
     output
   end
 
-  def add_note(note)
-    @arrayDepartments << note
-  end
-
-  def choose_note(index)
-    @selectedNote = index
-  end
-
-  def change_note(newNote)
-    @arrayDepartments[@selectedNote] = newNote
-  end
-
-  def get_selected_note
-    @arrayDepartments[@selectedNote]
-  end
-
-  def delete_note
-    @arrayDepartments.delete_at(@selectedNote)
-    @selectedNote = nil
-  end
-
   def sort_notes
-    @arrayDepartments.sort_by! {|department| department.name }
+    @list.sort_by! {|department| department.name }
+  end
+
+  # Сортировка по количеству вакантных должностей
+  def sort_vacant
+    @list.sort_by! {|department| department.post_list.post_list.select {|post| post.vacant == 0}}
   end
 end
