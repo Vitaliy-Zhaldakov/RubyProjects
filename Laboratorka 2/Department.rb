@@ -1,7 +1,8 @@
 current_path = File.dirname(__FILE__)
 require "#{current_path}/Post_list.rb"
+require "#{current_path}/EntityOperations.rb"
 
-class Department
+class Department < EntityOperations
   attr_accessor :name, :post_list
   attr_reader :phone
 
@@ -17,9 +18,10 @@ class Department
   def initialize(name, phone, posts=[])
     self.phone = phone
     self.name = name
-    @selectedDuty = nil
-    @duties = []
     @post_list = Post_list.new(posts)
+    # Обязанности
+    @selectedEntity = nil
+    @list = []
   rescue
     nil
   end
@@ -30,33 +32,11 @@ class Department
 
   # Урезанная форма
   def short_to_s
-    "Название: #{@name}\nТелефон: #{@phone}\nКоличество обязанностей: #{@duties.length}
+    "Название: #{@name}\nТелефон: #{@phone}\nКоличество обязанностей: #{@list.length}
 Число вакантных должностей: #{@post_list.get_vacant_posts.length}"
   end
 
-  # Методы работы с обязанностями
-  def add_duty(duty)
-    @duties << duty
-  end
-
-  def select_duty(index)
-    @selectedDuty = index
-  end
-
-  def delete_duty
-    @duties.delete_at(@selectedDuty)
-    @selectedDuty = nil
-  end
-
-  def get_text_selected_duty
-    @duties[@selectedDuty]
-  end
-
-  def change_selected_duty(newDuty)
-    @duties[@selectedDuty] = newDuty
-  end
-
   def get_duties
-    @duties.select {|duty| duty}
+    @list.select {|duty| duty}
   end
 end
