@@ -4,12 +4,11 @@ require "#{current_path}/EntityOperations.rb"
 class Post_list < EntityOperations
   attr_accessor :list
 
-  def initialize(array)
+  def initialize(*array)
     # Список должностей
-    @list = Array(array)
+    @list = array
     @selectedEntity = nil
   end
-
 
   def Post_list.read_from_txt(fileName)
     file = File.new(fileName, "r")
@@ -23,9 +22,9 @@ class Post_list < EntityOperations
     array
   end
 
-  def Post_list.write_to_txt(fileName, array)
+  def Post_list.write_to_txt(fileName)
     File.open(fileName, "w") do |file|
-      array.select {|post| file.puts("#{post.title}, #{post.department},
+      @list.select {|post| file.puts("#{post.title}, #{post.department},
         #{post.salary}, #{post.vacant}")}
     end
   end
@@ -45,6 +44,22 @@ class Post_list < EntityOperations
     File.open(fileName, 'a').puts YAML.dump(object)
   end
 
+  # Коллекция должностей, относящихся к заданному отделу
+  def posts_of_department(department)
+    Post_list.new(@list.select {|post| post.department == department})
+  end
+
+  # Коллекция вакантных должностей, относящихся к заданному отделу
+  def vacant_posts_of_dep(department)
+    Post_list.new(@list.select {|post| post.department == department and
+      post.vacant == 1})
+  end
+
+  # Коллекция должностей по названию
+  def posts_on_title(title)
+    Post_list.new(@list.select {|post| post.title.downcase.include?(title)})
+  end
+
   # Получить все вакантные должности отдела
   def get_vacant_posts
     @list.select {|post| post.vacant == 1}
@@ -53,4 +68,11 @@ class Post_list < EntityOperations
   def get_posts
     @list.select {|post| post}
   end
+
+  # Коллекция всех сотрудников, находящихся на данных должностях
+  def employees_on_posts
+    jobs = @list.select {|post| post.job_list}
+    Employee_list.new(jobs.select {|job| job.employee})
+  end
+  
 end

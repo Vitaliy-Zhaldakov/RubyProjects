@@ -39,4 +39,10 @@ class Department < EntityOperations
   def get_duties
     @list.select {|duty| duty}
   end
+
+  # Коллекция всех сотрудников, находящихся на данных должностях
+  def employees_on_posts
+    @post_list.employees_on_posts
+  end
+
 end
