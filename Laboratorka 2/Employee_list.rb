@@ -2,14 +2,33 @@ current_path = File.dirname(__FILE__)
 require "yaml"
 require "yaml/store"
 require "#{current_path}/EntityOperations.rb"
+require "#{current_path}/Employee.rb"
 
 class Employee_list < EntityOperations
+  # Поле, содержащее объект
+  @@instance=nil
   attr_accessor :list
 
-  def initialize(*array)
+  # Метод, создающий одиночку
+  def Employee_list.get_instance(*array)
+    if @@instance
+      @@instance.set_parameters(array)
+    else
+      @@instance = Employee_list.new(array)
+    end
+    @@instance
+  end
+
+  # "Ленивая инициализация"
+  def set_parameters(array)
     # Список работников
     @list = array
     @selectedEntity = nil
+  end
+
+  # Приватный конструктор
+  private def initialize(array)
+    self.set_parameters(array)
   end
 
   def Employee_list.read_from_txt(fileName)
@@ -46,3 +65,28 @@ class Employee_list < EntityOperations
   def Employee_list.write_to_YAML(fileName, list)
     File.new(fileName, 'w').puts YAML.dump(list)
   end
+
+ # Коллекция работников по ФИО
+  def employees_on_FIO(fio)
+    Employee_list.new(@list.select {|emp| emp.surname.downcase.include?(fio) or
+      emp.name.downcase.include?(fio) or emp.lastname.downcase.include?(fio)})
+  end
+
+  # Вычисление полного возраста
+  def current_age(birth, curDate)
+    age = curDate.year - birth.year
+    age = age - 1 if (
+      birth.month > curDate.month or
+      (birth.month >= curDate.month and birth.day > curDate.day)
+      )
+    age
+  end
+
+  # Сотрудники выбранного возраста
+  def employees_on_age(age)
+    curDate = Time.new
+    Employee_list.new(@list.select {|emp|
+      current_age(Time.new(emp.birthdate.split(".")[2], emp.birthdate.split(".")[1],
+      emp.birthdate.split(".")[0]), curDate) == age})
+  end
+end
