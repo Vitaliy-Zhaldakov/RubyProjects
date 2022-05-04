@@ -6,9 +6,9 @@ require "#{current_path}/EntityOperations.rb"
 class Department_list < EntityOperations
   attr_accessor :list
 
-  def initialize(array)
+  def initialize(*array)
     # Список отделов
-    @list = Array(array)
+    @list = array
     @selectedEntity = nil
   end
 
@@ -53,6 +53,7 @@ class Department_list < EntityOperations
     output
   end
 
+  # Сортировка по названию
   def sort_notes
     @list.sort_by! {|department| department.name }
   end
@@ -61,4 +62,15 @@ class Department_list < EntityOperations
   def sort_vacant
     @list.sort_by! {|department| department.post_list.post_list.select {|post| post.vacant == 0}}
   end
+
+  # Коллекция отделов по названию
+  def departments_on_name(name)
+    Department_list.new(@list.select {|dep| dep.name.downcase.include?(name)})
+  end
+
+  # Коллекция сотрудников, находящихся на данных должностях
+  def employees_on_posts
+    @list.select {|dep| dep.employees_on_posts}
+  end
+
 end
